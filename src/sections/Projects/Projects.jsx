@@ -1,5 +1,5 @@
 import styles from './ProjectsStyles.module.css';
-import viberr from '../../assets/viberr.png';
+import investment from '../../assets/investment.png';
 import freshBurger from '../../assets/fresh-burger.png';
 import hipsster from '../../assets/hipsster.png';
 import fitLift from '../../assets/fitlift.png';
@@ -11,28 +11,23 @@ function Projects() {
       <h1 className="sectionTitle">Projects</h1>
       <div className={styles.projectsContainer}>
         <ProjectCard
-          src={viberr}
-          link="https://github.com/Ade-mir/company-landing-page-2"
-          h3="Viberr"
-          p="Streaming App"
+          src={investment}
+          link="https://github.com/avipawardev/investment-portfolio-tracker/tree/main/investment-portfolio"
+          h3="Investments Tracker"
+          p="Stocks and Crypto"
         />
         <ProjectCard
           src={freshBurger}
-          link="https://github.com/Ade-mir/company-landing-page-2"
-          h3="Fresh Burger"
-          p="Hamburger Restaurant"
+          link="https://github.com/avipawardev/Recipe-Sharing-App"
+          h3="Recipe Sharing App"
+          p="Share Your Recipes"
         />
-        <ProjectCard
-          src={hipsster}
-          link="https://github.com/Ade-mir/company-landing-page-2"
-          h3="Hipsster"
-          p="Glasses Shop"
-        />
+        
         <ProjectCard
           src={fitLift}
-          link="https://github.com/Ade-mir/company-landing-page-2"
-          h3="FitLift"
-          p="Fitness App"
+          link=""
+          h3="Working"
+          p="In Progress..."
         />
       </div>
     </section>

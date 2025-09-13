@@ -1,10 +1,28 @@
 import styles from './ContactStyles.module.css';
+import emailjs from '@emailjs/browser';
+import { useRef } from 'react';
 
 function Contact() {
+  const form = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    emailjs.sendForm('service_h43ouq8', 'template_cb8sueh', form.current, 'sA5LPEX_Im63VLmCD')
+      .then((result) => {
+        console.log('Email sent successfully:', result.text);
+        alert('Message sent successfully!');
+        form.current.reset();
+      }, (error) => {
+        console.log('Email failed:', error.text);
+        alert('Failed to send message. Please try again.');
+      });
+  };
+
   return (
     <section id="contact" className={styles.container}>
       <h1 className="sectionTitle">Contact</h1>
-      <form action="">
+      <form ref={form} onSubmit={handleSubmit}>
         <div className="formGroup">
           <label htmlFor="name" hidden>
             Name
