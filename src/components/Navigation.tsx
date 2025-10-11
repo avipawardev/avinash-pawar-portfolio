@@ -35,9 +35,16 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+            className="text-3xl font-bold"
+            style={{
+              background: 'linear-gradient(45deg, #667eea 0%, #764ba2 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+              filter: 'drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3))'
+            }}
           >
-            AP
+            AWIN
           </motion.div>
 
           {/* Desktop Navigation */}
