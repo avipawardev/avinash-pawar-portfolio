@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isResumeDropdownOpen, setIsResumeDropdownOpen] = useState(false);
+  const [isMobileResumeDropdownOpen, setIsMobileResumeDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,18 +61,36 @@ const Navigation = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
               </a>
             ))}
-            <a
-              href="/AVINASH-PAWAR-Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <div className="relative">
               <Button
                 variant="outline"
                 className="border-primary text-primary hover:bg-primary hover:text-background transition-all"
+                onClick={() => setIsResumeDropdownOpen(!isResumeDropdownOpen)}
               >
-                Resume
+                Resume <ChevronDown className="ml-1 h-4 w-4" />
               </Button>
-            </a>
+              {isResumeDropdownOpen && (
+                <div className="absolute top-full mt-2 right-0 bg-background border border-foreground/20 rounded-lg shadow-lg z-50 min-w-[120px]">
+                  <a
+                    href="/AVINASH-PAWAR-Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
+                    onClick={() => setIsResumeDropdownOpen(false)}
+                  >
+                    View
+                  </a>
+                  <a
+                    href="/AVINASH-PAWAR-Resume.pdf"
+                    download="AVINASH-PAWAR-Resume.pdf"
+                    className="block px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors border-t border-foreground/10"
+                    onClick={() => setIsResumeDropdownOpen(false)}
+                  >
+                    Download
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -88,7 +108,7 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 flex flex-col gap-4"
+            className="md:hidden mt-4 flex flex-col gap-4 bg-background/95 backdrop-blur-md p-4 rounded-lg border border-foreground/10"
           >
             {navItems.map((item) => (
               <a
@@ -100,18 +120,36 @@ const Navigation = () => {
                 {item.label}
               </a>
             ))}
-            <a
-              href="/AVINASH-PAWAR-Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <div className="relative">
               <Button
                 variant="outline"
-                className="border-primary text-primary hover:bg-primary hover:text-background"
+                className="border-primary text-primary hover:bg-primary hover:text-background w-full justify-between"
+                onClick={() => setIsMobileResumeDropdownOpen(!isMobileResumeDropdownOpen)}
               >
-                Resume
+                Resume <ChevronDown className="ml-1 h-4 w-4" />
               </Button>
-            </a>
+              {isMobileResumeDropdownOpen && (
+                <div className="mt-2 bg-background/95 border border-foreground/20 rounded-lg">
+                  <a
+                    href="/AVINASH-PAWAR-Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
+                    onClick={() => setIsMobileResumeDropdownOpen(false)}
+                  >
+                    View
+                  </a>
+                  <a
+                    href="/AVINASH-PAWAR-Resume.pdf"
+                    download="AVINASH-PAWAR-Resume.pdf"
+                    className="block px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors border-t border-foreground/10"
+                    onClick={() => setIsMobileResumeDropdownOpen(false)}
+                  >
+                    Download
+                  </a>
+                </div>
+              )}
+            </div>
           </motion.div>
         )}
       </div>

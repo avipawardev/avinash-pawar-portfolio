@@ -58,14 +58,14 @@ const Projects = () => {
             />
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                 transition={{ delay: index * 0.1 }}
-                className="brutal-card overflow-hidden group transition-transform duration-300"
+                className="brutal-card overflow-hidden group transition-transform duration-300 w-full max-w-sm"
               >
                 <div className="relative overflow-hidden h-56">
                   <img
