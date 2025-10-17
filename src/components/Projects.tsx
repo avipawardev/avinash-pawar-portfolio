@@ -65,7 +65,7 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                 transition={{ delay: index * 0.1 }}
-                className="brutal-card overflow-hidden group transition-transform duration-300 w-full max-w-sm"
+                className="brutal-card overflow-hidden group transition-transform duration-300 w-full max-w-sm h-[600px] flex flex-col"
               >
                 <div className="relative overflow-hidden h-56">
                   <img
@@ -76,15 +76,15 @@ const Projects = () => {
                   <div className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
                 </div>
 
-                <div className="p-6 bg-card">
+                <div className="p-6 bg-card flex-1 flex flex-col">
                   <h3 className="text-2xl font-black mb-3 uppercase tracking-tight">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground mb-4 line-clamp-3 text-sm">
+                  <p className="text-muted-foreground mb-4 text-sm flex-1 line-clamp-4">
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2 mb-6 mt-auto">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
