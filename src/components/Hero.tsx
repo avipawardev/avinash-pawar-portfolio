@@ -1,14 +1,28 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
 import ThreeScene from './ThreeScene';
+import { useRef } from 'react';
 
 const Hero = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3]);
+  const scale = useTransform(scrollYProgress, [0, 0.8], [1, 0.95]);
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={ref} id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ThreeScene />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <motion.div 
+        className="container mx-auto px-4 relative z-10"
+        style={{ y, opacity, scale }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,23 +65,25 @@ const Hero = () => {
           >
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-wider border-4 border-foreground transition-all hover:translate-x-1 hover:translate-y-1"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-wider transition-all hover:translate-x-1 hover:translate-y-1"
             >
               <a href="#projects">View Projects</a>
             </Button>
-            <a
-              href="/AVINASH-PAWAR-Resume.pdf"
-              download="AVINASH-PAWAR-Resume.pdf"
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-4 border-foreground text-foreground hover:bg-foreground hover:text-background transition-all font-bold uppercase tracking-wider"
+              onClick={() => {
+                window.open('/AVINASH-PAWAR-Resume.pdf', '_blank');
+                const link = document.createElement('a');
+                link.href = '/AVINASH-PAWAR-Resume.pdf';
+                link.download = 'AVINASH-PAWAR-Resume.pdf';
+                link.click();
+              }}
             >
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-4 border-foreground text-foreground hover:bg-foreground hover:text-background transition-all font-bold uppercase tracking-wider"
-              >
-                <Download className="mr-2 h-5 w-5" />
-                Resume
-              </Button>
-            </a>
+              <Download className="mr-2 h-5 w-5" />
+              Resume
+            </Button>
           </motion.div>
 
           <motion.div
@@ -96,7 +112,7 @@ const Hero = () => {
             ))}
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
       <motion.div
         animate={{ y: [0, 10, 0] }}

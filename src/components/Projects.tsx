@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
@@ -7,6 +7,12 @@ import { Button } from '@/components/ui/button';
 const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
 
   const projects = [
     {
@@ -62,10 +68,15 @@ const Projects = () => {
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                transition={{ delay: index * 0.1 }}
-                className="brutal-card overflow-hidden group transition-transform duration-300 w-full max-w-sm h-[600px] flex flex-col"
+                initial={{ opacity: 0.3, y: 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.3, y: 10 }}
+                transition={{ 
+                  delay: index * 0.05, 
+                  duration: 1.2, 
+                  ease: [0.25, 0.1, 0.25, 1] 
+                }}
+                className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg overflow-hidden group apple-card w-full max-w-sm h-[600px] flex flex-col rounded-xl"
+                style={{ y: useTransform(scrollYProgress, [0, 1], [index * 5, index * -5]) }}
               >
                 <div className="relative overflow-hidden h-56">
                   <img

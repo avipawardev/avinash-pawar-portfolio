@@ -59,18 +59,14 @@ const Skills = () => {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
-              style={{
-                textShadow: '2px 2px 0px #667eea, 4px 4px 0px #764ba2, 6px 6px 10px rgba(0,0,0,0.3)',
-                transform: 'perspective(500px) rotateX(10deg)'
-              }}
+              className="text-5xl md:text-7xl font-black mb-6 text-foreground tracking-tighter uppercase"
             >
-              Skills & Expertise
+              Skills & <span className="text-primary">Expertise</span>
             </motion.h2>
             <motion.div
-              initial={{ width: 0 }}
-              animate={isInView ? { width: 80 } : { width: 0 }}
-              className="h-1 bg-gradient-to-r from-primary to-secondary mx-auto"
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+              className="h-2 w-40 bg-primary mx-auto border-4 border-foreground"
             />
           </div>
 
@@ -78,23 +74,36 @@ const Skills = () => {
             {skillCategories.map((category, categoryIndex) => (
               <motion.div
                 key={category.title}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                transition={{ delay: categoryIndex * 0.2 }}
-                className="glass-card p-6 rounded-xl"
+                initial={{ opacity: 0.3, y: 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.3, y: 10 }}
+                transition={{ 
+                  delay: categoryIndex * 0.05, 
+                  duration: 1.2, 
+                  ease: [0.25, 0.1, 0.25, 1] 
+                }}
+                className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg p-6 rounded-xl"
               >
-                <h3 className={`text-2xl font-bold mb-6 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
+                <h3 className="text-2xl font-black mb-6 uppercase tracking-tight text-foreground">
                   {category.title}
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   {category.skills.map((skill, skillIndex) => (
                     <motion.div
                       key={skill.name}
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
-                      transition={{ delay: categoryIndex * 0.2 + skillIndex * 0.1 }}
-                      whileHover={{ scale: 1.1, rotateY: 10 }}
-                      className="flex flex-col items-center p-4 bg-muted/20 rounded-lg border border-foreground/10 hover:border-primary/50 transition-all duration-300"
+                      initial={{ opacity: 0.4, scale: 0.98 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0.4, scale: 0.98 }}
+                      transition={{ 
+                        delay: categoryIndex * 0.05 + skillIndex * 0.02, 
+                        duration: 1, 
+                        ease: [0.25, 0.1, 0.25, 1] 
+                      }}
+                      whileHover={{ 
+                        scale: 1.02, 
+                        rotateY: 2,
+                        transition: { type: "spring", stiffness: 200, damping: 25 }
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex flex-col items-center p-4 bg-muted/20 rounded-lg border border-foreground/10 hover:border-primary/50 apple-card"
                       style={{
                         transformStyle: 'preserve-3d',
                         boxShadow: '0 4px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'

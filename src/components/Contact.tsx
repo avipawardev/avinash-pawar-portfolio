@@ -139,7 +139,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground border-4 border-foreground font-bold uppercase tracking-wider"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-wider"
                 >
                   Send Message
                 </Button>

@@ -12,14 +12,21 @@ const About = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.05,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+    hidden: { opacity: 0.3, y: 8 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 1.2,
+        ease: [0.25, 0.1, 0.25, 1]
+      }
+    },
   };
 
   const values = [
@@ -55,10 +62,10 @@ const About = () => {
           animate={isInView ? "visible" : "hidden"}
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              About Me
+            <h2 className="text-5xl md:text-7xl font-black mb-6 text-foreground tracking-tighter uppercase">
+              About <span className="text-primary">Me</span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto" />
+            <div className="h-2 w-40 bg-primary mx-auto border-4 border-foreground" />
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
@@ -84,7 +91,7 @@ const About = () => {
 
             <motion.div
               variants={itemVariants}
-              className="glass-card p-8 rounded-xl"
+              className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg p-8 rounded-xl"
             >
               <h3 className="text-2xl font-bold mb-6 text-primary">Quick Facts</h3>
               <div className="space-y-4">
@@ -114,7 +121,7 @@ const About = () => {
                 key={value.title}
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
-                className="glass-card p-6 rounded-xl text-center group"
+                className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg p-6 rounded-xl text-center group"
               >
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4 group-hover:bg-primary/20 transition-colors">
                   <value.icon className="text-primary" size={32} />
